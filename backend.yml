@@ -16,27 +16,26 @@ spec:
         role: backend
     spec:
       containers:
-      - name: backend-api
-        image: mernproject01.azurecr.io/radha-krishna-ADO-Nodejs-Backend-Excellence
-:VERSION
-        imagePullPolicy: Always
-        env:
-          - name: DB_CONN_STR
-            value: mongodb://mongodb-svc:27017/perseverance?directConnection=true
-          - name: DB_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: db-secret
-                key: username
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: db-secret
-                key: password
-        ports:
-        - containerPort: 3100
+        - name: backend-api
+          image: mernproject01.azurecr.io/radha-krishna-ADO-Nodejs-Backend-Excellence:VERSION
+          imagePullPolicy: Always
+          env:
+            - name: DB_CONN_STR
+              value: mongodb://mongodb-svc:27017/perseverance?directConnection=true
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password
+          ports:
+            - containerPort: 3100
       imagePullSecrets:
-      - name: acr-creds
+        - name: acr-creds
 ---
 apiVersion: v1
 kind: Service
@@ -48,6 +47,6 @@ spec:
   selector:
     role: backend
   ports:
-  - port: 8080
-    targetPort: 3100
-    nodePort: 30008
+    - port: 8080
+      targetPort: 3100
+      nodePort: 30008
