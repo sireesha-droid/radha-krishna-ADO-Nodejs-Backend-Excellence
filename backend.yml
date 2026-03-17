@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: backend-api
-          image: mernproject01.azurecr.io/radha-krishna-ADO-Nodejs-Backend-Excellence:VERSION
+          image: mernproject01.azurecr.io/SSPBackend:VERSION
           imagePullPolicy: Always
           env:
             - name: DB_CONN_STR
